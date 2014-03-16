@@ -1,0 +1,124 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+body {
+	font-family: 'Lato', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+	font-size: 16px;
+}
+
+/* register/login form */
+.form.container {
+	position: relative;
+	width: 800px;
+	margin: auto;
+	margin-top: 10%;
+}
+.form.container > form {
+	position: relative;
+	width: 500px;
+	background-color: #BAD0E8;
+	box-shadow: 0 0 0 0;
+}
+.form.container > form:before {
+	content: '';
+	border-style: solid;
+	border-width: 12px;
+	border-color: transparent;
+	border-left-color: #BAD0E8;
+	height: 0;
+	position: absolute;
+	width: 0;
+	right: -24px;
+	top: 70px;
+}
+.form.container > form .icon {
+	color: rgb(54, 105, 161);
+}
+.form.container > form input[type='text'],
+.form.container > form input[type='password'] {
+	border-color: transparent;
+	color: rgba(54, 105, 161, 0.7);
+}
+.form.container > form input[type='text']:focus,
+.form.container > form input[type='password']:focus {
+	border-color: #9CBCDE;
+	-webkit-box-shadow: 0.3em 0 0 0 #9CBCDE inset;
+	box-shadow: 0.3em 0 0 0 #9CBCDE inset;
+	color: rgba(54, 105, 161, 0.85);
+}
+
+.ui.labeled.icon.input.right > .icon {
+	margin-right: 0;
+}
+
+.form.panel {
+	position: absolute;
+	right: 0;
+	width: 228px;
+}
+.form.panel > h2 {
+	text-align: center;
+	position: relative;
+	left: -30px;
+	top: -10px;
+	color: #3669A1;
+}
+.form.panel > img {
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
+}
+
+/* misc */
+.pull-right {
+	float: right !important;
+}
+.pull-left {
+	float: left !important;
+}
+.hide {
+	display: none !important;
+}
+.show {
+	display: block !important;
+}
+
+.ui.input input {
+	font-family: 'Lato';
+}
+
+.home {
+	text-decoration: none;
+	color: #3669A1;
+}
+.home > i {
+	margin-right: 0 !important;
+}
+.home:hover > i {
+	color: #2B5582;
+}
+
+i.bigger.icon {
+	font-size: 3em;
+	vertical-align: middle;
+}
+
+/* buttons */
+.ui.dark.blue.buttons .button,
+.ui.dark.blue.button {
+	background-color: #3C76B4;
+	color: #FFFFFF;
+}
+.ui.dark.blue.buttons .button:hover,
+.ui.dark.blue.button:hover {
+	background-color: #3669A1;
+	color: #FFFFFF;
+}
+
+.ui.dark.blue.buttons .button:active,
+.ui.dark.blue.button:active {
+	background-color: #2B5582;
+	color: #FFFFFF;
+}
