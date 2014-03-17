@@ -67,7 +67,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	</style>
 </head>
 <body>
-	<a href='./' class="home">
+	<a href='./' class="home button">
 		<i class="large left arrow icon"></i>
 		<i class="bigger home icon"></i>
 	</a>

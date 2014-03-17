@@ -14,20 +14,23 @@ require('php/helpers.php');
 
 <body>
 	<div class="ui one column page grid">
-		<h1 class='ui center aligned header'>Some Name</h1>
+		<div class='navbar'>
+			<h1 class='ui header brand'>Some Cool Name</h1>
 
-		<div class="ui horizontal icon divider">
-		  <i class="massive cloud icon"></i>
+			<ul class='right nav'>
+				<? if(Helpers::loggedIn()) { ?>
+					<li><a><? echo Helpers::hi(); ?> <? echo Helpers::out($_SESSION['first']); ?></a></li>
+					<li><a href="logout">logout</a></li>
+				<? } else { ?>
+					<li><a href="login">login</a></li>
+					<li><a href="register">register</a></li>
+				<? } ?>
+			</ul>
 		</div>
 
-		<? if(Helpers::loggedIn()) { ?>
-			Sup <? echo Helpers::out($_SESSION['first']); ?>
-			<a href="logout">logout</a>
-		<? } else { ?>
-			Sup stranger
-			<a href="login">login</a>
-			<a href="register">register</a>
-		<? } ?>
+		<div class="ui horizontal icon divider">
+		  <i class="massive heart icon"></i>
+		</div>
 	</div>
 </body>
 </html>

@@ -72,6 +72,10 @@ body {
 }
 
 /* misc */
+a {
+	text-decoration: none;
+	color: inherit;
+}
 .pull-right {
 	float: right !important;
 }
@@ -89,20 +93,24 @@ body {
 	font-family: 'Lato';
 }
 
-.home {
+.home.button {
 	text-decoration: none;
 	color: #3669A1;
 }
-.home > i {
+.home.button > i {
 	margin-right: 0 !important;
 }
-.home:hover > i {
+.home.button:hover > i {
 	color: #2B5582;
 }
 
 i.bigger.icon {
 	font-size: 3em;
 	vertical-align: middle;
+}
+
+.ui.grid {
+	font-size: inherit;
 }
 
 /* buttons */
@@ -121,4 +129,65 @@ i.bigger.icon {
 .ui.dark.blue.button:active {
 	background-color: #2B5582;
 	color: #FFFFFF;
+}
+
+/* header */
+.navbar + .divider {
+	margin-top: 0 !important;
+}
+
+.nav {
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+.nav > li {
+	position: relative;
+	display: block;
+}
+.nav > li > a {
+	position: relative;
+	display: block;
+	padding: 10px 10px;
+	line-height: 20px
+}
+.navbar {
+	position: relative;
+	min-height: 50px;
+}
+.navbar .brand {
+	float: left;
+	margin-bottom: 0;
+}
+.navbar .nav {
+	float: left;
+	margin: 0;
+}
+.navbar .nav > li {
+	float: left;
+}
+.navbar .nav > li > a {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.navbar .nav.right:last-child {
+	margin-right: -10px;
+}
+.nav.left {
+	float: left !important;
+}
+.nav.right {
+	float: right !important;
+}
+
+.nav:before,
+.nav:after,
+.navbar:before,
+.navbar:after { 
+	display: table;
+	content: " ";
+}
+.nav:after,
+.navbar:after {
+	clear: both
 }
