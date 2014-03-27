@@ -6,19 +6,19 @@ body {
 }
 
 /* register/login form */
-.form.container {
+.user.form {
 	position: relative;
 	width: 800px;
 	margin: auto;
 	margin-top: 10%;
 }
-.form.container > form {
+.user.form > form {
 	position: relative;
 	width: 500px;
 	background-color: #BAD0E8;
 	box-shadow: 0 0 0 0;
 }
-.form.container > form:before {
+.user.form > form:before {
 	content: '';
 	border-style: solid;
 	border-width: 12px;
@@ -30,19 +30,23 @@ body {
 	right: -24px;
 	top: 70px;
 }
-.form.container > form .icon {
+.user.form > form .icon {
 	color: rgb(54, 105, 161);
 }
-.form.container > form input[type='text'],
-.form.container > form input[type='password'] {
+.user.form input[type='text'],
+.user.form input[type='password'] {
 	border-color: transparent;
+	color: rgb(54, 105, 161);
 	color: rgba(54, 105, 161, 0.7);
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.9);
 }
-.form.container > form input[type='text']:focus,
-.form.container > form input[type='password']:focus {
+.user.form input[type='text']:focus,
+.user.form input[type='password']:focus {
 	border-color: #9CBCDE;
 	-webkit-box-shadow: 0.3em 0 0 0 #9CBCDE inset;
 	box-shadow: 0.3em 0 0 0 #9CBCDE inset;
+	color: rgb(54, 105, 161);
 	color: rgba(54, 105, 161, 0.85);
 }
 
@@ -50,28 +54,99 @@ body {
 	margin-right: 0;
 }
 
-.form.panel {
+.user.form .panel {
 	position: absolute;
 	right: 0;
 	width: 228px;
 }
-.form.panel > h2 {
+.user.form .panel > h2 {
 	text-align: center;
 	position: relative;
 	left: -30px;
 	top: -10px;
 	color: #3669A1;
 }
-.form.panel > img {
+
+/* new/expand form */
+.drive.form {
+	position: relative;
+	width: 800px;
+	margin: auto;
+	margin-top: 10%;
+}
+.drive.form > form {
+	position: absolute;
+	right: 30px;
+	top: 0;
+	width: 500px;
+	background-color: #DDDDDD;
+	box-shadow: 0 0 0 0;
+}
+.drive.form > form:before {
+	content: '';
+	border-style: solid;
+	border-width: 12px;
+	border-color: transparent;
+	border-right-color: #DDDDDD;
+	height: 0;
+	position: absolute;
+	width: 0;
+	left: -24px;
+	top: 105px;
+}
+.drive.form > form .icon {
+	color: rgb(167, 167, 167);
+}
+
+.ui.checkbox label.dark.grey:after {
+	border-color: rgb(167, 167, 167);
+}
+.drive.form input[type='text'],
+.drive.form input[type='password'] {
+	border-color: transparent;
+	color: rgb(167, 167, 167);
+	color: rgba(167, 167, 167, 0.9);
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.drive.form input[type='text']:focus,
+.drive.form input[type='password']:focus {
+	border-color: #c4c4c4;
+	-webkit-box-shadow: 0.3em 0 0 0 #c4c4c4 inset;
+	box-shadow: 0.3em 0 0 0 #c4c4c4 inset;
+	color: rgb(167, 167, 167);
+	color: rgba(167, 167, 167, 1);
+}
+.drive.form .dropdown .menu .item,
+.drive.form .dropdown > .default.text,
+.drive.form .dropdown > .text {
+	color: rgb(167, 167, 167);
+	color: rgba(167, 167, 167, 0.9);
+}
+.drive.form .selection.dropdown,
+.drive.form .dropdown .menu {
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 0 0 0 !important;
+}
+
+.drive.form .panel {
+	padding-top: 20px;
+	margin-left: 30px;
+	position: relative;
+}
+
+/* misc */
+.flip {
 	-moz-transform: scaleX(-1);
 	-o-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
+	-ms-transform: scaleX(-1);
 	transform: scaleX(-1);
 	filter: FlipH;
 	-ms-filter: "FlipH";
 }
 
-/* misc */
 a {
 	text-decoration: none;
 	color: inherit;
@@ -92,6 +167,11 @@ a {
 .ui.input input {
 	font-family: 'Lato';
 }
+.ui.form .field :disabled,
+.ui.form .field.disabled {
+	opacity: 0.8;
+	cursor: not-allowed;
+}
 
 .home.button {
 	text-decoration: none;
@@ -104,13 +184,24 @@ a {
 	color: #2B5582;
 }
 
-i.bigger.icon {
+.bigger.icon {
 	font-size: 3em;
 	vertical-align: middle;
 }
 
 .ui.grid {
 	font-size: inherit;
+}
+
+/* backgrounds */
+.bg.blue {
+	background-color: #9CBCDE;
+}
+.bg.grey {
+	background-color: #EBEBEB;
+}
+.bg.green {
+	background-color: #19A768;
 }
 
 /* buttons */
@@ -128,6 +219,23 @@ i.bigger.icon {
 .ui.dark.blue.buttons .button:active,
 .ui.dark.blue.button:active {
 	background-color: #2B5582;
+	color: #FFFFFF;
+}
+
+.ui.dark.grey.buttons .button,
+.ui.dark.grey.button {
+	background-color: #999;
+	color: #FFFFFF;
+}
+.ui.dark.grey.buttons .button:hover,
+.ui.dark.grey.button:hover {
+	background-color: #808080;
+	color: #FFFFFF;
+}
+
+.ui.dark.grey.buttons .button:active,
+.ui.dark.grey.button:active {
+	background-color: #666666;
 	color: #FFFFFF;
 }
 
@@ -150,6 +258,12 @@ i.bigger.icon {
 	display: block;
 	padding: 10px 10px;
 	line-height: 20px
+}
+.nav > li.wider > a {
+	padding-right: 60px;
+}
+.nav > li.name {
+	width: 110px;
 }
 .navbar {
 	position: relative;
@@ -190,4 +304,73 @@ i.bigger.icon {
 .nav:after,
 .navbar:after {
 	clear: both
+}
+
+/* message */
+.ui.dark.segment,
+.ui.dark.message {
+	background-color: #e2e2e2;
+}
+.ui.compact.icon.message {
+	width: inherit;
+}
+.ui.centered.message {
+	margin-left: auto;
+	margin-right: auto;
+}
+.ui.message a {
+	color: rgb(0, 0, 0);
+	color: rgba(0, 0, 0, 0.7);
+	font-weight: bold;
+}
+
+/* side menu */
+.ui.secondary.vertical.pointing.menu {
+	border-right: none;
+}
+.ui.slim.vertical.menu {
+	width: 10rem;
+	text-align: right;
+}
+.ui.secondary.vertical.pointing.menu > .item {
+	border-right: 3px solid rgba(0, 0, 0, 0.1);
+}
+.vertical.menu > .wider.item {
+	margin-top: 2em !important;
+}
+
+/* requests */
+.request > .icons {
+	position: absolute;
+	right: 0.15em;
+	bottom: 0.6em;
+}
+.request > .icons > i {
+	cursor: pointer;
+}
+.request > .status {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-weight: bold;
+}
+.request > .status.green {
+	color: #A1CF64;
+}
+.request > .status.red {
+	color: #D95C5C;
+}
+.request > .status.yellow {
+	color: #D6B341;
+}
+
+/* approver content */
+.nodrives {
+	width: 400px;
+	position: fixed;
+	left: 50%;
+	margin-left: -200px;
+}
+.nodrives > .ui.header {
+	text-align: center;
 }

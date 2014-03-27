@@ -1,0 +1,53 @@
+<? $rq = Helpers::getRequests(); if(!empty($rq)) { ?>
+	<div class="ui tab active" data-tab="requests">
+		<h3 class="ui header">List of your requests</h3>
+
+		<? foreach($rq as $request) { ?>
+			<div class="ui dark segment request">
+				<h4><? echo Helpers::out($request['name']); ?></h4>
+				<? if($request['type'] == 0) { ?>
+					<b><? echo intval($request['size']) / 1000; ?> GB</b> drive for the
+					<b><? echo ucfirst($request['faculty']); ?></b> faculty.
+				<? } else { ?>
+					<b><? echo intval($request['size']) / 1000; ?> GB</b> of additional space for a
+					<b><? echo ucfirst($request['faculty']); ?></b> faculty drive.
+				<? } ?>
+
+				<? if($request['status'] == 0) { ?>
+					<span class='status yellow'>This request is still pending</span>
+					<div class="icons">
+						<i class="large trash icon"></i>
+					</div>
+				<? } elseif($request['status'] == 1) { ?>
+					<span class='status green'>This request has been approved</span>
+				<? } elseif($request['status'] == 2) { ?>
+					<span class='status red'>This request has been denied</span>
+				<? } ?>
+			</div>
+		<? } ?>
+	</div>
+<? } ?>
+
+<? $dr = Helpers::getAll(); if(!empty($dr)) { ?>
+	<div class="ui tab" data-tab="all">
+		all
+	</div>
+<? } ?>
+
+<? $p = Helpers::getP(); if(!empty($p)) { ?>
+	<div class="ui tab" data-tab="investigator">
+		investigator
+	</div>
+<? } ?>
+
+<? $d = Helpers::getD(); if(!empty($d)) { ?>
+	<div class="ui tab" data-tab="manager">
+		manager
+	</div>
+<? } ?>
+
+<? $r = Helpers::getR(); if(!empty($r)) { ?>
+	<div class="ui tab" data-tab="researcher">
+		researcher
+	</div>
+<? } ?>

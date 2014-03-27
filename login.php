@@ -59,23 +59,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang='en'>
 <head>
 	<meta charset='utf-8'>
-	<title>Login</title>
-	<? require('php/common.php'); ?>
-
-	<style>
-		body { background-color: #9CBCDE; }
-	</style>
+	<title>Login | Dragon Storage</title>
+	<? require('views/common.php'); ?>
 </head>
-<body>
+<body class='bg blue'>
 	<a href='./' class="home button">
 		<i class="large left arrow icon"></i>
 		<i class="bigger home icon"></i>
 	</a>
 
-	<div class="form container">
-		<div class='form panel'>
-			<img class='ui image' src='img/cloud_dragon.png' width='227' height='227'>
-			<h2>Welcome to <br>Some Cool Name</h2>
+	<div class="user form">
+		<div class='panel'>
+			<img class='ui flip image' src='img/cloud_dragon.png' width='227' height='227'>
+			<h2>Welcome to <br>Dragon Storage</h2>
 		</div>
 
 		<form id='form-login' method='post' class='ui form segment'>

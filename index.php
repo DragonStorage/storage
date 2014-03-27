@@ -8,29 +8,51 @@ require('php/helpers.php');
 <html lang='en'>
 <head>
 	<meta charset='utf-8'>
-	<title>Storage</title>
-	<? require('php/common.php'); ?>
+	<title>Dragon Storage</title>
+	<? require('views/common.php'); ?>
 </head>
 
-<body>
+<body class="bg grey">
 	<div class="ui one column page grid">
-		<div class='navbar'>
-			<h1 class='ui header brand'>Some Cool Name</h1>
+		<? require('views/navbar.php'); ?>
 
-			<ul class='right nav'>
-				<? if(Helpers::loggedIn()) { ?>
-					<li><a><? echo Helpers::hi(); ?> <? echo Helpers::out($_SESSION['first']); ?></a></li>
-					<li><a href="logout">logout</a></li>
-				<? } else { ?>
-					<li><a href="login">login</a></li>
-					<li><a href="register">register</a></li>
-				<? } ?>
-			</ul>
-		</div>
-
-		<div class="ui horizontal icon divider">
-		  <i class="massive heart icon"></i>
-		</div>
+		<? if(Helpers::loggedIn()) { ?>
+			<? if($faculty = Helpers::getApprover()) { ?>
+				<div class="ui grid">
+					<div class="three wide column">
+						<? require('views/approver_side.php'); ?>
+					</div>
+					<div class="twelve wide column">
+						<? require('views/approver_content.php'); ?>
+					</div>
+				</div>
+			<? } elseif(Helpers::hasDrives() || Helpers::hasRequests()) { ?>
+				<div class="ui grid">
+					<div class="three wide column">
+						<? require('views/user_side.php'); ?>
+					</div>
+					<div class="twelve wide column">
+						<? require('views/user_content.php'); ?>
+					</div>
+				</div>
+			<? } else { ?>
+				<div class="ui centered dark compact icon message">
+					<i class="hdd icon"></i>
+					<div class="content">
+						<div class="header">Well</div>
+						<p>It appears you are not currently a member of any storage drives, to fix that try some of the following things!</p>
+						<ul class="list">
+							<li><a href="new">Provision</a> your own drive and become a Principal Investigator</li>
+							<li>Ask someone in your research team to add you to their disk</li>
+						</ul>
+					</div>				
+				</div>
+			<? } ?>
+		<? } else { ?>
+			<div>not logged in</div>
+		<? } ?>
 	</div>
+
+	<? require('views/js.php'); ?>
 </body>
 </html>
