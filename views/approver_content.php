@@ -64,11 +64,29 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	</div>
 <? } ?>
 
-<div class="ui tab" data-tab="drives">
+<div class="ui tab drives" data-tab="drives">
 	<? $d = Helpers::getFacultyDrives($faculty); if(!empty($d)) { ?>
 		<h3 class="ui header"><? echo ucfirst($faculty); ?> faculty drives</h3>
 		<? $used = 0; $reserved = 0; ?>
-		yay there's drives
+
+		<? foreach($d as $drive) { 
+			$used += intval($drive['used']);
+			$reserved += intval($drive['capacity']);
+		?>
+			<a class="ui dark segment drive">
+				<h4><? echo Helpers::out($drive['name']); ?></h4>
+
+				<b><? echo round(intval($drive['used'])/1000, 2) . ' / ' . round(intval($drive['capacity'])/1000, 2); ?> GB</b> -
+				<b><? echo round(100 - intval($drive['used']) / intval($drive['capacity'])); ?>%</b> remaining
+				
+				<div class="role">123 researchers</div>
+			</a>
+		<? } ?>
+
+		<div class="tally">
+			This faculty is using <b><? echo Helpers::niceNumber($used); ?></b> its reserved <b><? echo Helpers::niceNumber($reserved); ?></b>
+		</div>
+
 	<? } else { ?>
 		<div class="nodrives">
 			<img class="flip ui image" src='img/zombie_dragon3.png' width='400' height='289'>
@@ -96,4 +114,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			}
 		});
 	});
+
+	// move tally back up to the top, needed to be at the bottom for correct numbers
+	$('.drives > .tally').insertAfter('.drives > h3.header');
 </script>

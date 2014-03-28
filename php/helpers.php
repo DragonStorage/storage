@@ -161,7 +161,7 @@ class Helpers {
 		return $user;
 	}
 
-	// returnt he actual role rather than just the table name
+	// return the actual role rather than just the table name
 	function getReadableRole($role) {
 		$roles = array(
 			"principals" => "Principal Investigator",
@@ -205,6 +205,15 @@ class Helpers {
 		}
 
 		return implode($s, $name);
+	}
+
+	// returns a nice number i think
+	function niceNumber($n) {
+		if(!is_numeric($n)) return $n;
+
+		if($n > 1000000) return number_format($n/1000000,2). ' TB';
+		else if($n > 1000) return number_format($n/1000,2) . ' GB';
+		else return number_format($n) . ' MB';
 	}
 }
 
