@@ -65,7 +65,16 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 <? } ?>
 
 <div class="ui tab" data-tab="drives">
-	drives
+	<? $d = Helpers::getFacultyDrives($faculty); if(!empty($d)) { ?>
+		<h3 class="ui header"><? echo ucfirst($faculty); ?> faculty drives</h3>
+		<? $used = 0; $reserved = 0; ?>
+		yay there's drives
+	<? } else { ?>
+		<div class="nodrives">
+			<img class="flip ui image" src='img/zombie_dragon3.png' width='400' height='289'>
+			<h3 class="ui header">there are no drives :(</h3>
+		</div>
+	<? } ?>
 </div>
 
 <script type="text/javascript">

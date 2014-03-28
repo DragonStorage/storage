@@ -107,9 +107,12 @@ class Helpers {
 		$sql = "select drive from $role where id='$id'";
 		$result = mysqli_query($db, $sql);
 
-		if($result)
-			while($row = mysqli_fetch_assoc($result))
+		if($result) {
+			while($row = mysqli_fetch_assoc($result)) {
+				$row['role'] = Helpers::getReadableRole($role); // add user role to the drive for listing later
 				$drives[] = $row;
+			}
+		}
 
 		return $drives;
 	}
@@ -156,6 +159,17 @@ class Helpers {
 			$user = mysqli_fetch_assoc($result);
 
 		return $user;
+	}
+
+	// returnt he actual role rather than just the table name
+	function getReadableRole($role) {
+		$roles = array(
+			"principals" => "Principal Investigator",
+			"managers" => "Data Manager",
+			"researchers" => "Researcher"
+		);
+
+		return $roles[$role];
 	}
 
 	// safely insert into the database

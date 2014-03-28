@@ -364,6 +364,17 @@ a {
 	color: #D6B341;
 }
 
+/* drive listing */
+.ui.tab > a.drive {
+	display: block;
+}
+.drive .role {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-weight: bold;
+}
+
 /* approver content */
 .nodrives {
 	width: 400px;
