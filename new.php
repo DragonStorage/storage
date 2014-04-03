@@ -4,7 +4,7 @@
 require('php/helpers.php');
 
 // gotta be logged in to do stuff yo
-if(!Helpers::loggedIn()) {
+if(!Helpers::loggedIn() || !Helpers::canCreate()) {
 	header('location: ./');
 	exit();
 }
@@ -17,7 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = Helpers::in($_POST['name']);
 	$faculty = Helpers::in($_POST['faculty']);
 
-	if(!$faculty || !in_array($faculty, array('pointy', 'round'), true)) {
+	if(!$faculty || !in_array($faculty, array('cbs', 'hs', 'h', 'se'), true)) {
 		$error = true;
 		$error_message = "Looks like you didn't select a faculty";
 	}
@@ -87,8 +87,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 						<div class="default text">Faculty</div>
 						<i class="dropdown icon"></i>
 						<div class="menu">
-							<div class="item" data-value="pointy">Pointy</div>
-							<div class="item" data-value="round">Round</div>
+							<div class="item" data-value="cbs">Curtin Business School</div>
+							<div class="item" data-value="hs">Health Sciences</div>
+							<div class="item" data-value="h">Humanities</div>
+							<div class="item" data-value="se">Science &amp; Engineering</div>
 						</div>
 					</div>
 				</div>

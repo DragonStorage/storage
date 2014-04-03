@@ -66,7 +66,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <div class="ui tab drives" data-tab="drives">
 	<? $d = Helpers::getFacultyDrives($faculty); if(!empty($d)) { ?>
-		<h3 class="ui header"><? echo ucfirst($faculty); ?> faculty drives</h3>
+		<h3 class="ui header"><? echo Helpers::getReadableFaculty($faculty); ?> faculty drives</h3>
 		<? $used = 0; $reserved = 0; ?>
 
 		<? foreach($d as $drive) { 
@@ -84,7 +84,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 		<? } ?>
 
 		<div class="tally">
-			This faculty is using <b><? echo Helpers::niceNumber($used); ?></b> its reserved <b><? echo Helpers::niceNumber($reserved); ?></b>
+			This faculty is using <b><? echo Helpers::niceNumber($used); ?></b> of its reserved <b><? echo Helpers::niceNumber($reserved); ?></b>
 		</div>
 
 	<? } else { ?>

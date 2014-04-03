@@ -7,10 +7,10 @@
 				<h4><? echo Helpers::out($request['name']); ?></h4>
 				<? if($request['type'] == 0) { ?>
 					<b><? echo intval($request['size']) / 1000; ?> GB</b> drive for the
-					<b><? echo ucfirst($request['faculty']); ?></b> faculty.
+					<b><? echo Helpers::getReadableFaculty($request['faculty']); ?></b> faculty.
 				<? } else { ?>
 					<b><? echo intval($request['size']) / 1000; ?> GB</b> of additional space for a
-					<b><? echo ucfirst($request['faculty']); ?></b> faculty drive.
+					<b><? echo Helpers::getReadableFaculty($request['faculty']); ?></b> faculty drive.
 				<? } ?>
 
 				<? if($request['status'] == 0) { ?>

@@ -12,6 +12,21 @@ class Helpers {
 		}
 	}
 
+	// returns true if the logged in user is part of the PI whitelist
+	function canCreate() {
+		global $db;
+
+		$id = $_SESSION['id'];
+		$sql = "select id from whitelist where id='$id'";
+		$result = mysqli_query($db,$sql);
+
+		if($result && mysqli_num_rows($result)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	// returns true if the currently logged in user has pending requests
 	function hasRequests() {
 		if(!Helpers::loggedIn()) return false;
@@ -170,6 +185,20 @@ class Helpers {
 		);
 
 		return $roles[$role];
+	}
+
+	// return a readable entry since we use shortened things
+	function getReadableFaculty($faculty) {
+		$faculties = array(
+			"pointy" => "Pointy",
+			"round" => "Round",
+			"se" => "Curtin Business School",
+			"hs" => "Health Sciences",
+			"h" => "Humanities",
+			"se" => "Sciences & Engineering"
+		);
+
+		return $faculties[$faculty];
 	}
 
 	// safely insert into the database

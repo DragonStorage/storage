@@ -1,0 +1,5 @@
+if post
+	update request in database
+	insert new drive into database
+	insert new principal into databse
+	rollback if any failed

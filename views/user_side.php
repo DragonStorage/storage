@@ -29,5 +29,7 @@
 			Researcher
 		</a>
 	<? } ?>
+	<? if(Helpers::canCreate()) { ?>
 		<a class="item wider" href="new">New</a>
+	<? } ?>
 </div>

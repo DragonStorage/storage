@@ -1,0 +1,15 @@
+if POST
+	check for each input field
+
+	if no error
+		check if username exists
+		if free
+			isert into databse
+			if worked
+				redirect to index
+			else
+				show error
+		else
+			show error
+	else
+		show error

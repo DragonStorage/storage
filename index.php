@@ -1,8 +1,12 @@
 <!doctype html>
 
 <?
-require('php/helpers.php');
+if(isset($_GET['drive'])) {
+	require('./drive.php');
+	exit();
+}
 
+require('php/helpers.php');
 ?>
 
 <html lang='en'>

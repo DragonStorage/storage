@@ -1,4 +1,4 @@
-<a class="ui dark segment drive">
+<a href="./?drive=<? echo $drive['uid']; ?>" class="ui dark segment drive">
 	<h4><? echo Helpers::out($drive['name']); ?></h4>
 
 	<b><? echo round(intval($drive['used'])/1000, 2) . ' / ' . round(intval($drive['capacity'])/1000, 2); ?> GB</b> -

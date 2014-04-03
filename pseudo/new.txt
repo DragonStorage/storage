@@ -1,0 +1,10 @@
+if not logged in
+	redirect to index
+
+if POST
+	check if POST.faculty is real
+	check if POST.dragons is ticked
+
+	insert into databse
+	if worked
+		redirect to requests tab
