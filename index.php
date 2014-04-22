@@ -53,7 +53,10 @@ require('php/helpers.php');
 				</div>
 			<? } ?>
 		<? } else { ?>
-			<div>not logged in</div>
+			<div class="login">
+				<img class="ui image" src="img/ice_dragon.png" width="200" height="167">
+				<a href='login' class='ui small dark blue button'>Login</a>
+			</div>
 		<? } ?>
 	</div>
 

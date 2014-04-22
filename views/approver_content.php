@@ -39,7 +39,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 <? $rq = Helpers::getFacultyRequests($faculty); if(!empty($rq)) { ?>
 	<div class="ui tab active" data-tab="requests">
-		<h3 class="ui header"><? echo ucfirst($faculty); ?> faculty requests</h3>
+		<h3 class="ui header"><? echo Helpers::getReadableFaculty($faculty); ?> faculty requests</h3>
 
 		<? foreach($rq as $request) { ?>
 			<? $user = Helpers::getUser($request['user']); ?>

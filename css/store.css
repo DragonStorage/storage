@@ -385,3 +385,13 @@ a {
 .nodrives > .ui.header {
 	text-align: center;
 }
+
+/* index page */
+.login {
+	width: 200px;
+	margin: auto;
+}
+.login .button {
+	margin-top: 10px;
+	margin-left: 57.5px;
+}

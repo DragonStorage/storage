@@ -192,7 +192,7 @@ class Helpers {
 		$faculties = array(
 			"pointy" => "Pointy",
 			"round" => "Round",
-			"se" => "Curtin Business School",
+			"cbs" => "Curtin Business School",
 			"hs" => "Health Sciences",
 			"h" => "Humanities",
 			"se" => "Sciences & Engineering"
