@@ -72,7 +72,7 @@ class Helpers {
 		global $db;
 		$drives = array();
 
-		$sql = "select name, capacity, used from drives where faculty='$faculty'";
+		$sql = "select uid, name, capacity, used from drives where faculty='$faculty'";
 		$result = mysqli_query($db, $sql);
 
 		if($result)
@@ -176,6 +176,62 @@ class Helpers {
 		return $user;
 	}
 
+	// return true if the user is a member of the drive in any way
+	function memberOf($drive) {
+		return Helpers::pOf($drive) || Helpers::dOf($drive) || Helpers::rOf($drive);
+	}
+
+	// return true if the user is a PI of the drive
+	function pOf($drive) {
+		return Helpers::doOf('principals', $drive);
+	}
+
+	// return true if the user is a DM of the drive
+	function dOf($drive) {
+		return Helpers::doOf('managers', $drive);
+	}
+
+	// return true if the user is a researcher of the drive
+	function rOf($drive) {
+		return Helpers::doOf('researchers', $drive);
+	}
+
+	// finds if the user is a member of the specified group and drive
+	function doOf($role, $drive) {
+		global $db;
+
+		$id = $_SESSION['id'];
+		$sql = "select uid from $role where id='$id' and drive='$drive'";
+		$result = mysqli_query($db, $sql);
+		$rows = mysqli_num_rows($result);
+
+		return $rows ? true : false;
+	}
+
+	// returns the number of users that are a member of the drive
+	function countMembers($drive) {
+		return count(Helpers::getMembers($drive));
+	}
+
+	function getMembers($drive) {
+		global $db;
+
+		$tables = array('principals', 'managers', 'researchers');
+		$members = array();;
+
+		for($ii=0; $ii<3; $ii++) {
+			$sql = "select id from $tables[$ii] where drive='$drive'";
+			$result = mysqli_query($db, $sql);
+
+			while($row = mysqli_fetch_assoc($result)) {
+				$row['role'] = $tables[$ii];
+				$members[] = $row;
+			}
+		}
+
+		return $members;
+	}
+
 	// return the actual role rather than just the table name
 	function getReadableRole($role) {
 		$roles = array(
@@ -199,6 +255,17 @@ class Helpers {
 		);
 
 		return $faculties[$faculty];
+	}
+
+	// return info about a user
+	function getUserName($id) {
+		global $db;
+
+		$sql = "select first, last from users where id='$id'";
+		$result = mysqli_query($db, $sql);
+		$row = mysqli_fetch_assoc($result);
+
+		return ucfirst($row['first']) . " " . ucfirst($row['last']);
 	}
 
 	// safely insert into the database

@@ -374,6 +374,28 @@ a {
 	right: 1em;
 	font-weight: bold;
 }
+.drive .faculty {
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
+}
+
+/* detailed drive listing */
+.detailed .role {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	font-weight: bold;
+}
+.detailed .info > .users > div {
+	margin-bottom: 0.5em;
+}
+.detailed .stats {
+	margin: auto;
+	width: 300px;
+	height: 240px;
+	padding-bottom: 5px;
+}
 
 /* approver content */
 .nodrives {

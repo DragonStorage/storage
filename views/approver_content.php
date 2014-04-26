@@ -79,7 +79,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 				<b><? echo round(intval($drive['used'])/1000, 2) . ' / ' . round(intval($drive['capacity'])/1000, 2); ?> GB</b> -
 				<b><? echo round(100 - intval($drive['used']) / intval($drive['capacity'])); ?>%</b> remaining
 				
-				<div class="role">123 researchers</div>
+				<div class="role"><?
+					$members = Helpers::countMembers($drive['uid']);
+					echo $members . " researcher" . ($members>1?"s":""); 
+				?></div>
 			</a>
 		<? } ?>
 
