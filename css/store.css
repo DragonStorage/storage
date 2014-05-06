@@ -405,6 +405,11 @@ a {
 	width: 130px;
 }
 
+.detailed .content .change > span {
+	cursor: pointer;
+	color: #2E90BE;
+}
+
 /* approver content */
 .nodrives {
 	width: 400px;

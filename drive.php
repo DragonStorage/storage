@@ -119,7 +119,9 @@ $members = Helpers::getMembers($driveID);
 												<th>ID</th>
 												<th>Name</th>
 												<th>Role</th>
-												<th>Stuff</th>
+												<? if($drive['role'] == 'principals' || $drive['role'] == 'managers') { ?>
+													<th>Grant/Revoke</th>
+												<? } ?>
 											</tr></thead>
 
 											<tbody>
@@ -127,11 +129,31 @@ $members = Helpers::getMembers($driveID);
 												<tr>
 													<td><? echo $user['id']; ?></td>
 													<td><? echo Helpers::getUserName($user['id']); ?></td>
-													<td><? echo $user['role']; ?></td>
-													<td><!-- add stuff here --></td>
+													<td><? echo Helpers::getReadableRole($user['role']); ?></td>
+
+													<? if($drive['role'] == 'principals' || $drive['role'] == 'managers') { ?>
+														<td>
+															<? if($drive['role'] == 'principals') { ?>
+																<div class="change" name="<? echo $user['id']; ?>"><?
+																	if($user['role'] == 'managers') {
+																		?><span>Demote</span><?
+																	} else {
+																		?><span>Promote</span>&nbsp;&nbsp;&nbsp;<span>Remove</span><?
+																	}
+																?></div>
+															<? } else { ?>
+																<div class="change" name="<? echo $user['id']; ?>"><?
+																	if($user['role'] == 'researchers') {
+																		?><span>Remove</span><?
+																	}
+																?></div>
+															<? } ?>
+														</td>
+													<? } ?>
 											<? } ?>
 											</tbody>
-										</table>									</div>
+										</table>
+									</div>
 								</div>
 							<? } ?>
 						</div>
@@ -164,5 +186,30 @@ $members = Helpers::getMembers($driveID);
 	</div>
 
 	<? require('views/js.php'); ?>
+
+	<script type="text/javascript">
+		$('.detailed .change span').on('click', function() {
+			$.ajax({
+				url: "php/promote.php",
+				type: "POST",
+				data: {
+					action: $(this).html(),
+					id: $(this).parent().attr('name'),
+					drive: <? echo $driveID; ?>
+				},
+
+				success: function(data) {
+					if(data === 'commit')
+						location.reload(); // lazy hack for ui update
+					else {
+						console.log(data);
+					}
+				}
+			});
+		});
+
+		// move tally back up to the top, needed to be at the bottom for correct numbers
+		$('.drives > .tally').insertAfter('.drives > h3.header');
+	</script>
 </body>
 </html>
