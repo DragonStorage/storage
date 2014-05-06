@@ -18,7 +18,24 @@ class Helpers {
 
 		$id = $_SESSION['id'];
 		$sql = "select id from whitelist where id='$id'";
-		$result = mysqli_query($db,$sql);
+		$result = mysqli_query($db, $sql);
+
+		if($result && mysqli_num_rows($result)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	// returns true if the logged in user is a PI or a DM of the drive
+	function canAdd($drive) {
+		global $db;
+
+		$id = $_SESSION['id'];
+		$sql = "select * from managers where id='$id' and drive='$drive'
+				union
+				select * from principals where id='$id' and drive='$drive'";
+		$result = mysqli_query($db, $sql);
 
 		if($result && mysqli_num_rows($result)) {
 			return true;
@@ -41,7 +58,7 @@ class Helpers {
 		global $db;
 		$requests = array();
 
-		$sql = "select user, faculty, name, size, status, type from requests where user='$id'";
+		$sql = "select * from requests where user='$id'";
 		$result = mysqli_query($db, $sql);
 
 		if($result)

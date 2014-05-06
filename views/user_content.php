@@ -4,13 +4,17 @@
 
 		<? foreach($rq as $request) { ?>
 			<div class="ui dark segment request">
-				<h4><? echo Helpers::out($request['name']); ?></h4>
 				<? if($request['type'] == 0) { ?>
+					<h4><? echo Helpers::out($request['name']); ?></h4>
+
 					<b><? echo intval($request['size']) / 1000; ?> GB</b> drive for the
 					<b><? echo Helpers::getReadableFaculty($request['faculty']); ?></b> faculty.
 				<? } else { ?>
+					<? $drive = Helpers::getDrive($request['drive']); ?>
+					<h4><? echo Helpers::out($drive['name']); ?></h4>
+
 					<b><? echo intval($request['size']) / 1000; ?> GB</b> of additional space for a
-					<b><? echo Helpers::getReadableFaculty($request['faculty']); ?></b> faculty drive.
+					<b><? echo Helpers::getReadableFaculty($drive['faculty']); ?></b> faculty drive.
 				<? } ?>
 
 				<? if($request['status'] == 0) { ?>

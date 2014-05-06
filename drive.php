@@ -100,6 +100,40 @@ $members = Helpers::getMembers($driveID);
 									}
 								?></b>.
 							</div>
+
+							<? // if there's researchers show the promote demote thingo
+								$researchers = array_filter($members, function($item) {
+									return $item['role'] == 'researchers' || $item['role'] == 'managers';
+								});
+
+							if(!empty($researchers)) { ?>
+								<div class="ui fluid accordion">
+									<div class="title">
+										<i class="dropdown icon"></i>
+										Researchers
+									</div>
+
+									<div class="content">
+										<table class="ui table segment">
+											<thead><tr>
+												<th>ID</th>
+												<th>Name</th>
+												<th>Role</th>
+												<th>Stuff</th>
+											</tr></thead>
+
+											<tbody>
+											<? foreach($researchers as $user) { ?>
+												<tr>
+													<td><? echo $user['id']; ?></td>
+													<td><? echo Helpers::getUserName($user['id']); ?></td>
+													<td><? echo $user['role']; ?></td>
+													<td><!-- add stuff here --></td>
+											<? } ?>
+											</tbody>
+										</table>									</div>
+								</div>
+							<? } ?>
 						</div>
 
 						<!-- do promote/demote and add/remove stuff here -->
@@ -118,6 +152,9 @@ $members = Helpers::getMembers($driveID);
 									gagueColor: "#EBEBEB"
 								});
 							</script>
+							<div class="more">
+								<a href="./additional?drive=<? echo $driveID; ?>" class="ui small black button">More Space</a>
+							</div>
 						</div>
 					</div>
 
