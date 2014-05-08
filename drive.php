@@ -20,6 +20,29 @@ elseif(Helpers::rOf($driveID))
 	$drive['role'] = 'researchers';
 
 $members = Helpers::getMembers($driveID);
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$add = Helpers::in($_POST['id']);
+
+	if(($drive['role'] == 'principals' ||
+		$drive['role'] == 'managers') &&
+		!in_array($add, $members)) {
+		$sql = "select * from users where id='$add';";
+		$result = mysqli_query($db, $sql);
+		$num = mysqli_num_rows($result);
+
+		if($num) {
+			$sql = "insert into researchers(id, drive)
+					values('$add', '$driveID');";
+			$result = mysqli_query($db, $sql);
+
+			if($result) {
+				header("Location: ./?drive=".$driveID);
+				exit();
+			}
+		}
+	}
+}
 ?>
 
 <html lang='en'>
@@ -157,6 +180,15 @@ $members = Helpers::getMembers($driveID);
 								</div>
 							<? } ?>
 						</div>
+
+						<? if($drive['role'] == 'principals' || $drive['role'] == 'managers') { ?>
+							<form class="add" method="post">
+								<div class="ui action input">
+								  <input type="text" name="id" placeholder="User ID">
+								  <button type="submit" class="ui small black button">Add User</button>
+								</div>
+							</form>
+						<? } ?>
 
 						<!-- do promote/demote and add/remove stuff here -->
 						<div></div>

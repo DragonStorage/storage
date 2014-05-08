@@ -404,10 +404,32 @@ a {
 	margin: auto;
 	width: 130px;
 }
-
 .detailed .content .change > span {
 	cursor: pointer;
 	color: #2E90BE;
+}
+.detailed .add {
+	margin: auto;
+	width: 320px;
+}
+.detailed .add input[type='text']:focus {
+	border-color: #c4c4c4;
+	-webkit-box-shadow: 0.3em 0 0 0 #c4c4c4 inset;
+	box-shadow: 0.3em 0 0 0 #c4c4c4 inset;
+	color: rgb(167, 167, 167);
+	color: rgba(167, 167, 167, 1);
+}
+.detailed .add input[type='text'] {
+	height: 36px;
+	width: auto;
+	border-color: transparent;
+	color: rgb(167, 167, 167);
+	color: rgba(167, 167, 167, 0.8);
+	background-color: rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.9);
+}
+.detailed .add .button {
+	margin-top: -2px;
 }
 
 /* approver content */

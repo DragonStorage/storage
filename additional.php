@@ -14,7 +14,6 @@ $error_message = "";
 $error_header = 'Oops';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$projectID = Helpers::in($_GET['drive']);
-	$storageRequest = Helpers::in($_POST['storageRequest']);
 	$reason = Helpers::in($_POST['reason']);
 
 	if(!isset($_POST['dragons'])) {
@@ -63,12 +62,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<p>Submit your request with a good reason.</p>
 				</div>
 				<? } ?>
-				<div class='field'>
-					<div class='ui right labeled icon input'>
-						<input type='text' name='storageRequest' placeholder="Size">                               
-						<i class='hdd icon'></i>
-					</div>
-				</div>
 				<div class='field'>
 					<div class=''>
 						<textarea name="reason" form="form-additional" placeholder="Reason"></textarea>
