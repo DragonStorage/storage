@@ -12,6 +12,11 @@ class Helpers {
 		}
 	}
 
+	// returns true if the user is an admin
+	function isAdmin() {
+		return $_SESSION['admin'];
+	}
+
 	// returns true if the logged in user is part of the PI whitelist
 	function canCreate() {
 		global $db;
@@ -59,6 +64,36 @@ class Helpers {
 		$requests = array();
 
 		$sql = "select * from requests where user='$id'";
+		$result = mysqli_query($db, $sql);
+
+		if($result)
+			while($row = mysqli_fetch_assoc($result))
+				$requests[] = $row;
+
+		return $requests;
+	}
+
+	// returns all the drives for the admin
+	function getAllDrives() {
+		global $db;
+		$drives = array();
+
+		$sql = "select * from drives";
+		$result = mysqli_query($db, $sql);
+
+		if($result)
+			while($row = mysqli_fetch_assoc($result))
+				$drives[] = $row;
+
+		return $drives;
+	}
+
+	// returns all the requests for the admin
+	function getAllRequests() {
+		global $db;
+		$requests = array();
+
+		$sql = "select * from requests";
 		$result = mysqli_query($db, $sql);
 
 		if($result)
@@ -268,7 +303,8 @@ class Helpers {
 			"cbs" => "Curtin Business School",
 			"hs" => "Health Sciences",
 			"h" => "Humanities",
-			"se" => "Sciences & Engineering"
+			"se" => "Sciences & Engineering",
+			"all" => "Every"
 		);
 
 		return $faculties[$faculty];

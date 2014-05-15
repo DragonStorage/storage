@@ -30,6 +30,15 @@ require('php/helpers.php');
 						<? require('views/approver_content.php'); ?>
 					</div>
 				</div>
+			<? } elseif(Helpers::isAdmin()) { $faculty = 'all'; ?>
+				<div class="ui grid">
+					<div class="three wide column">
+						<? require('views/approver_side.php'); ?>
+					</div>
+					<div class="twelve wide column">
+						<? require('views/approver_content.php'); ?>
+					</div>
+				</div>					
 			<? } elseif(Helpers::hasDrives() || Helpers::hasRequests()) { ?>
 				<div class="ui grid">
 					<div class="three wide column">

@@ -37,7 +37,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 
 ?>
 
-<? $rq = Helpers::getFacultyRequests($faculty); if(!empty($rq)) { ?>
+<? 
+	if($faculty === 'all') $rq = Helpers::getAllRequests();
+	else $rq = Helpers::getFacultyRequests($faculty);
+ 	
+ 	if(!empty($rq)) { ?>
 	<div class="ui tab active" data-tab="requests">
 		<h3 class="ui header"><? echo Helpers::getReadableFaculty($faculty); ?> faculty requests</h3>
 
@@ -65,7 +69,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 <? } ?>
 
 <div class="ui tab drives" data-tab="drives">
-	<? $d = Helpers::getFacultyDrives($faculty); if(!empty($d)) { ?>
+	<?
+	if($faculty === 'all') $d = Helpers::getAllDrives();
+	else $d = Helpers::getFacultyDrives($faculty); 
+	
+	if(!empty($d)) { ?>
 		<h3 class="ui header"><? echo Helpers::getReadableFaculty($faculty); ?> faculty drives</h3>
 		<? $used = 0; $reserved = 0; ?>
 
