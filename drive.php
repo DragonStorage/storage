@@ -7,7 +7,7 @@ $driveID = $_GET['drive'];
 
 // redirect back home if the user isn't logged in or a member
 // of the drive they're trying to view
-if(!Helpers::loggedIn() || !Helpers::memberOf($driveID))
+if(!Helpers::loggedIn() || (!Helpers::memberOf($driveID) && !Helpers::isAdmin()))
 	header('location: ./');
 
 $drive = Helpers::getDrive($driveID);
@@ -18,6 +18,8 @@ elseif(Helpers::dOf($driveID))
 	$drive['role'] = 'managers';
 elseif(Helpers::rOf($driveID))
 	$drive['role'] = 'researchers';
+elseif(Helpers::isAdmin())
+	$drive['role'] = 'admin';
 
 $members = Helpers::getMembers($driveID);
 

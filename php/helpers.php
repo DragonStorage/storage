@@ -289,7 +289,8 @@ class Helpers {
 		$roles = array(
 			"principals" => "Principal Investigator",
 			"managers" => "Data Manager",
-			"researchers" => "Researcher"
+			"researchers" => "Researcher",
+			"admin" => "Administrator"
 		);
 
 		return $roles[$role];
