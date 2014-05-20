@@ -40,6 +40,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 			if($result) {
 				header("Location: ./?drive=".$driveID);
+				Helpers::sendMail($add, "You were granted Researcher rights to drive '" . $drive['name'] . "'.");
 				exit();
 			}
 		}
@@ -63,41 +64,58 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		<div class="ui grid">
 			<div class="three wide column">
-				<div class="ui slim secondary vertical pointing menu">
-					<? $rq = Helpers::getRequests(); if(!empty($rq)) { ?>
-						<a class="item" href="./#/requests">
-							<div class="ui small label"><? echo count($rq); ?></div>
-							Requests
-						</a>
-					<? } ?>
-					<? $dr = Helpers::getAll(); if(!empty($dr)) { ?>
-						<a class="item" href="./#/all">
-							<div class="ui small label"><? echo count($dr); ?></div>
-							All drives
-						</a>
-					<? } ?>
-					<? $p = Helpers::getP(); if(!empty($p)) { ?>
-						<a class="item pad" href="./#/investigator">
-							<div class="ui small label"><? echo count($p); ?></div>
-							<div>Principal Investigator</div>
-						</a>
-					<? } ?>
-					<? $d = Helpers::getD(); if(!empty($d)) { ?>
-						<a class="item" href="./#/manager">
+				<? if(Helpers::isAdmin()) { // admin view ?>
+					<div class="ui slim secondary vertical pointing menu tabs">
+						<? $rq = Helpers::getAllRequests(); if(!empty($rq)) { ?>
+							<a class="active item" href="./#/requests">
+								<div class="ui small label"><? echo count($rq); ?></div>
+								Requests
+							</a>
+						<? } ?>
+
+						<? $d = Helpers::getAllDrives(); ?>
+						<a class="item" href="./#/drives">
 							<div class="ui small label"><? echo count($d); ?></div>
-							Data Manager
+							Drives
 						</a>
-					<? } ?>
-					<? $r = Helpers::getR(); if(!empty($r)) { ?>
-						<a class="item" href="./#/researcher">
-							<div class="ui small label"><? echo count($r); ?></div>
-							Researcher
-						</a>
-					<? } ?>
-					<? if(Helpers::canCreate()) { ?>
-						<a class="item wider" href="new">New</a>
-					<? } ?>
-				</div>
+					</div>
+				<? } else { // user view ?>
+					<div class="ui slim secondary vertical pointing menu">
+						<? $rq = Helpers::getRequests(); if(!empty($rq)) { ?>
+							<a class="item" href="./#/requests">
+								<div class="ui small label"><? echo count($rq); ?></div>
+								Requests
+							</a>
+						<? } ?>
+						<? $dr = Helpers::getAll(); if(!empty($dr)) { ?>
+							<a class="item" href="./#/all">
+								<div class="ui small label"><? echo count($dr); ?></div>
+								All drives
+							</a>
+						<? } ?>
+						<? $p = Helpers::getP(); if(!empty($p)) { ?>
+							<a class="item pad" href="./#/investigator">
+								<div class="ui small label"><? echo count($p); ?></div>
+								<div>Principal Investigator</div>
+							</a>
+						<? } ?>
+						<? $d = Helpers::getD(); if(!empty($d)) { ?>
+							<a class="item" href="./#/manager">
+								<div class="ui small label"><? echo count($d); ?></div>
+								Data Manager
+							</a>
+						<? } ?>
+						<? $r = Helpers::getR(); if(!empty($r)) { ?>
+							<a class="item" href="./#/researcher">
+								<div class="ui small label"><? echo count($r); ?></div>
+								Researcher
+							</a>
+						<? } ?>
+						<? if(Helpers::canCreate()) { ?>
+							<a class="item wider" href="new">New</a>
+						<? } ?>
+					</div>
+				<? } ?>
 			</div>
 			<div class="twelve wide column">
 				<div class="ui dark segment detailed">

@@ -18,6 +18,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$last = Helpers::in($_POST['last']);
 	$id = Helpers::in($_POST['id']);
 	$pass = Helpers::in($_POST['password']);
+	$email = Helpers::in($_POST['email']);
 
 	if(!$first) {
 		$error_message .= 'first name, ';
@@ -31,6 +32,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if(!$id) {
 		$error_message .= 'Curtin ID, ';
+		$error = true;
+	}
+
+	if(!$email) {
+		$error_message .= "email, ";
 		$error = true;
 	}
 
@@ -50,8 +56,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 		// user doesn't already exist
 		if($row === NULL) {
-			$sql = "insert into users(first, last, id, password)
-					values('$first', '$last', '$id', '$pass')";
+			$sql = "insert into users(first, last, id, password, email)
+					values('$first', '$last', '$id', '$pass', '$email')";
 			$result = mysqli_query($db, $sql);
 
 			if($result) {
@@ -59,6 +65,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$_SESSION['id'] = $id;
 				$_SESSION['first'] = $first;
 				$_SESSION['last'] = $last;
+				$_SESSION['email'] = $email;
+				$_SESSION['admin'] = false;
 
 				header('location: ./');
 				exit();
@@ -116,6 +124,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 				<div class='ui right labeled icon input'>
 					<input type='text' name='id' placeholder='curtin id'>
 					<i class='user icon'></i>
+				</div>
+			</div>
+
+			<div class='field'>
+				<div class='ui right labeled icon input'>
+					<input type='text' name='email' placeholder='email'>
+					<i class='mail icon'></i>
 				</div>
 			</div>
 

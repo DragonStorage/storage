@@ -11,14 +11,17 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 	if($_POST['action'] && $_POST['id'] && $_POST['drive']) {
 		// re-setup things because we're just posting ajax to this file
 		if(!isset($_SESSION)) {
-			session_start();
+			//session_start();
 			require('db.php');
+			require('helpers.php');
 		}
 
 		$me = $_SESSION['id'];
 		$id = $_POST['id'];
 		$drive = $_POST['drive'];
 		$action = in_array($_POST['action'], array("Promote", "Demote", "Remove")) ? $_POST['action'] : false;
+
+		$d = Helpers::getDrive($drive);
 
 		if(!$action) return; // invalid form so quit
 
@@ -31,6 +34,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			if($r1 && $r2) {
 				mysqli_query($db, "commit");
 				echo "commit";
+				Helpers::sendMail($id, 'You were promoted to Data Manager on drive \''.$d['name'].'\'.');
 			} else {
 				mysqli_query($db, "rollback");
 				var_dump($r1);
@@ -46,6 +50,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			if($r1 && $r2) {
 				mysqli_query($db, "commit");
 				echo "commit";
+				Helpers::sendMail($id, 'You were demoted to Researcher on drive \''.$d['name'].'\'.');
 			} else {
 				mysqli_query($db, "rollback");
 				var_dump($r1);
@@ -54,7 +59,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			}
 		} else if($action === 'Remove') {
 			$result = mysqli_query($db, "delete from researchers where id='$id' and drive='$drive'");
-			if($result) echo "commit";
+			if($result) {
+				echo "commit";
+				Helpers::sendMail($id, 'You were removed from drive \''.$d['name'].'\'.');
+			}
 		}
 
 		exit();

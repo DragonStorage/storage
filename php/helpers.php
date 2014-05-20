@@ -1,5 +1,6 @@
 <?php
 require('php/db.php');
+require 'PHPMailerAutoload.php';
 session_start();
 
 class Helpers {
@@ -219,7 +220,7 @@ class Helpers {
 		global $db;
 		$user = null;
 
-		$sql = "select first, last, id from users where id='$id'";
+		$sql = "select first, last, id, email from users where id='$id'";
 		$result = mysqli_query($db, $sql);
 
 		if($result)
@@ -320,6 +321,30 @@ class Helpers {
 		$row = mysqli_fetch_assoc($result);
 
 		return ucfirst($row['first']) . " " . ucfirst($row['last']);
+	}
+
+	// send email
+	function sendMail($user, $message) {
+		$user = Helpers::getUser($user);
+
+		$mail = new PHPMailer;
+
+		$mail->isSMTP();
+
+		$mail->Host = "smtp.mailgun.org";
+		$mail->Port = 25;
+		$mail->SMTPAuth = true;
+		$mail->Username = "postmaster@sandbox94627.mailgun.org";
+		$mail->Password = "2a4xqo090ny9";
+
+		$mail->addAddress($user['email']);
+		$mail->setFrom("batman@dragons.com", "Batman");
+
+		$mail->Subject = "DRAGONS YO";
+		$mail->Body = "Dear " . $user['first'] . ",<br>" . $message;
+		$mail->isHTML(true);
+
+		$mail->send();
 	}
 
 	// safely insert into the database
