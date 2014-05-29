@@ -110,7 +110,7 @@ class Helpers {
 		global $db;
 		$requests = array();
 
-		$sql = "select uid, user, name, size, status from requests where faculty='$faculty' and type=0";
+		$sql = "select * from requests where faculty='$faculty' and type=0";
 		$result = mysqli_query($db, $sql);
 
 		if($result)
@@ -125,7 +125,7 @@ class Helpers {
 		global $db;
 		$drives = array();
 
-		$sql = "select uid, name, capacity, used from drives where faculty='$faculty'";
+		$sql = "select uid, name, capacity, used, from drives where faculty='$faculty'";
 		$result = mysqli_query($db, $sql);
 
 		if($result)

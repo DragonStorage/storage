@@ -109,6 +109,10 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 						</div>
 					<? } ?>
 
+				<? if($request['reason'] != '') { ?>
+					<p><? echo $request['reason']; ?></p>
+				<? } ?>
+
 				<? if($request['type'] == 0) { ?>
 					<b><? echo Helpers::out($user['id']) . ' - ' . Helpers::out($user['first']) . ' ' . Helpers::out($user['last']); ?></b> is requesting a
 					<b><? echo intval($request['size']) / 1000; ?> GB</b> drive.

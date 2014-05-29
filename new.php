@@ -16,6 +16,7 @@ $error_header = 'Oops';
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = Helpers::in($_POST['name']);
 	$faculty = Helpers::in($_POST['faculty']);
+	$reason = Helpers::in($_POST['reason']);
 
 	if(!$faculty || !in_array($faculty, array('cbs', 'hs', 'h', 'se'), true)) {
 		$error = true;
@@ -31,8 +32,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	if(!$error) {
 		$id = $_SESSION['id'];
 
-		$sql = "insert into requests(name, faculty, user)
-				values('$name', '$faculty', '$id');";
+		$sql = "insert into requests(name, faculty, user, reason)
+				values('$name', '$faculty', '$id', '$reason');";
 		$result = mysqli_query($db, $sql);
 
 		if($result) {
@@ -78,6 +79,12 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 					<div class='ui right labeled icon input'>
 						<input type='text' name='name' value='<? echo Helpers::name(); ?>' readonly>
 						<i class='hdd icon'></i>
+					</div>
+				</div>
+
+				<div class='field'>
+					<div>
+						<textarea name="reason" form="form-new" placeholder="Project Description"></textarea>
 					</div>
 				</div>
 

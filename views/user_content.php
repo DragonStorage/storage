@@ -19,9 +19,6 @@
 
 				<? if($request['status'] == 0) { ?>
 					<span class='status yellow'>This request is still pending</span>
-					<div class="icons">
-						<i class="large trash icon"></i>
-					</div>
 				<? } elseif($request['status'] == 1) { ?>
 					<span class='status green'>This request has been approved</span>
 				<? } elseif($request['status'] == 2) { ?>
