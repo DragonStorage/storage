@@ -164,6 +164,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 												<th>Role</th>
 												<? if($drive['role'] == 'principals' || $drive['role'] == 'managers') { ?>
 													<th>Grant/Revoke</th>
+												<? } else if($drive['role'] == 'admin') { ?>
+													<th>Promote to Principal</th>
 												<? } ?>
 											</tr></thead>
 
@@ -174,7 +176,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 													<td><? echo Helpers::getUserName($user['id']); ?></td>
 													<td><? echo Helpers::getReadableRole($user['role']); ?></td>
 
-													<? if($drive['role'] == 'principals' || $drive['role'] == 'managers') { ?>
+													<? if($drive['role'] == 'principals' || $drive['role'] == 'managers' || $drive['role'] == 'admin') { ?>
 														<td>
 															<? if($drive['role'] == 'principals') { ?>
 																<div class="change" name="<? echo $user['id']; ?>"><?
@@ -184,12 +186,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 																		?><span>Promote</span>&nbsp;&nbsp;&nbsp;<span>Remove</span><?
 																	}
 																?></div>
-															<? } else { ?>
+															<? } else if($drive['role'] == 'managers') { ?>
 																<div class="change" name="<? echo $user['id']; ?>"><?
 																	if($user['role'] == 'researchers') {
 																		?><span>Remove</span><?
 																	}
 																?></div>
+															
+															<? } else { 
+																// admin change principal
+															?>
+																 <div class="change" name="<? echo $user['id']; ?>">
+																	<span>Make Principal</span>
+																</div>
 															<? } ?>
 														</td>
 													<? } ?>

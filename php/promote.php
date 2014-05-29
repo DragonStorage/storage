@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 		$me = $_SESSION['id'];
 		$id = $_POST['id'];
 		$drive = $_POST['drive'];
-		$action = in_array($_POST['action'], array("Promote", "Demote", "Remove")) ? $_POST['action'] : false;
+		$action = in_array($_POST['action'], array("Promote", "Demote", "Remove", "Make Principal")) ? $_POST['action'] : false;
 
 		$d = Helpers::getDrive($drive);
 
@@ -62,6 +62,39 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			if($result) {
 				echo "commit";
 				Helpers::sendMail($id, 'You were removed from drive \''.$d['name'].'\'.');
+			}
+		} else if($action === 'Make Principal') {
+			$members = Helpers::getMembers($drive);
+			foreach($members as $member) {
+				if($member['role'] == "principals") {
+					$prevId = $member['id'];
+				}
+
+				if($id == $member['id']) {
+					$role = $member['role'];
+				}
+			}
+
+			mysqli_query($db, "start transaction");
+			$r1 = mysqli_query($db, "delete from " . $role . " where id='$id' and drive='$drive'");
+			$r2 = mysqli_query($db, "delete from principals where drive='$drive'");
+			$r3 = mysqli_query($db, "insert into principals(id, drive) values('$id', '$drive')");
+			$r4 = mysqli_query($db, "insert into managers(id, drive) values('$prevId', '$drive')");
+
+			if($r1 && $r2 && $r3 && $r4)
+			{
+				mysqli_query($db, "commit");
+				echo "commit";
+				Helpers::sendMail($id, 'You were promoted to Principal Investigator from drive \''.$d['name'].'\'.');
+				Helpers::sendMail($prevId, 'You were demoted from Principal Investigator from drive \''.$d['name'].'\'.');
+
+			} else {
+				mysqli_query($db, "rollback");
+				var_dump($r1);
+				var_dump($r2);
+				var_dump($r3);
+				var_dump($r4);
+				echo "rollback";
 			}
 		}
 
